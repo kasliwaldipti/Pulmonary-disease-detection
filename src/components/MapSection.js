@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import { withStyles } from "@material-ui/styles";
-
 import Map from "./Map";
-import {Card,Button} from 'react-bootstrap'
-import DisplayPanels from "./DisplayPanels";
-import '../styles/GuideCard.css'
+import { Card } from "react-bootstrap";
+import "../styles/GuideCard.css";
 
 import styles from "../styles/MapSection";
 
@@ -40,22 +38,16 @@ class MapSection extends Component {
   }
 
   render() {
-    const { classes, mapData, isDarkMode } = this.props;
-    const {
-      confirmed,
-      deaths,
-      recovered,
-      active,
-      state,
-      deltaconfirmed,
-      deltadeaths,
-      deltarecovered,
-      deltaactive,
-    } = this.state;
+    const { classes, mapData } = this.props;
+    const { confirmed, deaths, recovered, active, state } = this.state;
 
     return (
       <div className={classes.mainContainer}>
-        <div className={classes.heading}><small><b>State/UT:</b> {state}</small></div>
+        <div className={classes.heading}>
+          <small>
+            <b>State/UT:</b> {state}
+          </small>
+        </div>
         <div className={classes.para}>
           Hover over the states in the map to view the stats
         </div>
@@ -98,45 +90,36 @@ class MapSection extends Component {
               />
             </div> */}
             <div className="grid">
-            <Card className='boxMapSec'>
-                <Card.Title style={{fontSize:'16px'}}>Confirmed</Card.Title>
+              <Card className="boxMapSec">
+                <Card.Title style={{ fontSize: "16px" }}>Confirmed</Card.Title>
                 <Card.Body>
-                <Card.Text style={{color: 'red'}}>
-                    {confirmed}
-                </Card.Text>
-            </Card.Body>
-        </Card>
-        <Card className='boxMapSec'>
-                <Card.Title style={{fontSize:'16px'}}>Active</Card.Title>
+                  <Card.Text style={{ color: "red" }}>{confirmed}</Card.Text>
+                </Card.Body>
+              </Card>
+              <Card className="boxMapSec">
+                <Card.Title style={{ fontSize: "16px" }}>Active</Card.Title>
                 <Card.Body>
-                <Card.Text style={{color: 'orange'}}>
-                    {active}
-                </Card.Text>
-            </Card.Body>
-        </Card>
-        <Card className='boxMapSec'>
-                <Card.Title style={{fontSize:'16px'}}>Recovered</Card.Title>
+                  <Card.Text style={{ color: "orange" }}>{active}</Card.Text>
+                </Card.Body>
+              </Card>
+              <Card className="boxMapSec">
+                <Card.Title style={{ fontSize: "16px" }}>Recovered</Card.Title>
                 <Card.Body>
-                <Card.Text style={{color: 'green'}}>
-                    {recovered}
-                </Card.Text>
-            </Card.Body>
-        </Card>
-        <Card className='boxMapSec'>
-                <Card.Title style={{fontSize:'16px'}}>Deceased</Card.Title>
+                  <Card.Text style={{ color: "green" }}>{recovered}</Card.Text>
+                </Card.Body>
+              </Card>
+              <Card className="boxMapSec">
+                <Card.Title style={{ fontSize: "16px" }}>Deceased</Card.Title>
                 <Card.Body>
-                <Card.Text style={{color: 'purple'}}>
-                    {deaths}
-                </Card.Text>
-            </Card.Body>
-        </Card>
-        </div>
+                  <Card.Text style={{ color: "purple" }}>{deaths}</Card.Text>
+                </Card.Body>
+              </Card>
+            </div>
           </div>
           <div className={classes.mapContainer}>
             <Map mapData={mapData} currentLocation={this.currentLocation} />
           </div>
-
-        </div>     
+        </div>
       </div>
     );
   }

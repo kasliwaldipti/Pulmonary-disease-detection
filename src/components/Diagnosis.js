@@ -1,15 +1,13 @@
-import React, { Component, useState } from "react";
+import React, { Component } from "react";
 import { Button } from "@material-ui/core";
 import axios from "axios";
 import { Form, Col } from "react-bootstrap";
 import { Footer } from "./Footer";
 import "../styles/Diagnosis.css";
-import { red } from "@material-ui/core/colors";
+
 import jsPDF from "jspdf";
-import html2canvas from "html2canvas";
 import "firebase/firestore";
 import fire from "../firebase/config";
-import ReactLoading from "react-loading";
 import ClipLoader from "react-spinners/ClipLoader";
 export default class Diagnosis extends Component {
   constructor(props) {
@@ -159,7 +157,6 @@ export default class Diagnosis extends Component {
         this.setState({
           output: res.data,
         });
-        //setOutput(res.data)
       })
       .catch((err) => {
         console.log(err);
@@ -167,7 +164,7 @@ export default class Diagnosis extends Component {
     console.log(res);
     const db = fire.firestore();
 
-    const userRef = db.collection("patients").add({
+    const userRef = await db.collection("patients").add({
       name: this.state.name,
       phoneno: this.state.phoneno,
       email: this.state.email,
@@ -177,6 +174,7 @@ export default class Diagnosis extends Component {
       indiaState: this.state.indiaState,
       zip: this.state.zip,
     });
+    console.log(userRef);
   }
   printDoc() {
     //     // const input = document.getElementById('Diagnosis');
@@ -270,7 +268,7 @@ export default class Diagnosis extends Component {
       );
       doc.save("demo.pdf");
     } else if (this.state.output.custom_chest_pred === "Pneumonia") {
-      var doc = new jsPDF("p", "pt");
+      // var doc = new jsPDF("p", "pt");
       doc.setFillColor(0, 102, 99);
       doc.rect(0, 0, 700, 50, "F");
       doc.setFontSize(28);
@@ -342,7 +340,7 @@ export default class Diagnosis extends Component {
       );
       doc.save("demo.pdf");
     } else if (this.state.output.custom_chest_pred === "Normal") {
-      var doc = new jsPDF("p", "pt");
+      // var doc = new jsPDF("p", "pt");
       doc.setFillColor(0, 102, 99);
       doc.rect(0, 0, 700, 50, "F");
       doc.setFontSize(28);

@@ -17,43 +17,38 @@
 
 // export default PopupDisplay
 
-import React, { Component } from 'react'
-import Popup from './Popup'
-import { Modal } from 'react-bootstrap';
+import React, { Component } from "react";
+import { Modal } from "react-bootstrap";
 export class PopupDisplay extends Component {
-    constructor(){
-        super();
-        this.state = {
-            viewPopup: false,
-        }
-        
-
+  constructor() {
+    super();
+    this.state = {
+      viewPopup: false,
+    };
+  }
+  componentDidMount() {
+    let visited = localStorage["alreadyVisited"];
+    if (visited) {
+      this.setState({ viewPopup: true });
+      console.log("In component visited");
+    } else {
+      localStorage["alreadyVisited"] = false;
+      this.setState({ viewPopup: false });
+      console.log("In component else");
     }
-    componentDidMount(){
-        let visited = localStorage['alreadyVisited'];
-        if(visited){
-            this.setState({viewPopup: true})
-            console.log("In component visited")
-        }
-        else{
-            localStorage['alreadyVisited']=false;
-            this.setState({viewPopup: false})
-            console.log("In component else")
-        }
-    }
-    render() {
-        return (
-            <Modal
-            aria-labelledby='modal-label'
-            autoFocus={false}
-            show={this.state.viewPopup}
-            onHide={()=>this.setState({viewPopup:false})}
-            >
-                <div>Hello</div>
-            </Modal>
-        )
-    }
+  }
+  render() {
+    return (
+      <Modal
+        aria-labelledby="modal-label"
+        autoFocus={false}
+        show={this.state.viewPopup}
+        onHide={() => this.setState({ viewPopup: false })}
+      >
+        <div>Hello</div>
+      </Modal>
+    );
+  }
 }
 
-export default PopupDisplay
-
+export default PopupDisplay;
